@@ -18,7 +18,8 @@ echo "==> Waiting..."
 wait_for_wildfly
 
 echo "==> Executing..."
-$JBOSS_CLI -c --file=`dirname "$0"`/batch.cli
+echo "Runnind datasource.cli"
+$JBOSS_CLI -c --file=`dirname "$0"`/datasource.cli
 
 echo "==> Shutting down WildFly..."
 if [ "$JBOSS_MODE" = "standalone" ]; then

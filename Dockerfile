@@ -12,7 +12,7 @@ RUN yum update -y && yum install wget unzip -y \
 && echo "admin=readwrite,read,admin" >> standalone/configuration/application-roles.properties \ 
 && wget -O /tmp/postgresql-9.4.1208.jre7.jar https://jdbc.postgresql.org/download/postgresql-9.4.1208.jre7.jar 
 ADD batchfiles/config.sh /tmp/
-ADD batchfiles/batch.cli /tmp/
+ADD datasource.cli /tmp/
 RUN /tmp/config.sh
 CMD ["/opt/wildfly/bin/adduser.sh","-a","admin admin"]
 
