@@ -1,6 +1,6 @@
 FROM centos:latest
 
-MAINTAINER Sami Kallio
+MAINTAINER Sami Kallio phinaliumz at outlook.com
 
 RUN yum update -y && yum install wget unzip -y \   
 && wget http://download.jboss.org/wildfly/9.0.1.Final/wildfly-9.0.1.Final.tar.gz && tar -C /opt/ -xzf wildfly-9.0.1.Final.tar.gz \ 
@@ -17,11 +17,10 @@ RUN yum update -y && yum install wget unzip -y \
 && unzip fakeSMTP-latest.zip && rm -f fakeSMTP-latest.zip
 ADD batchfiles/config.sh /tmp/
 ADD datasource.cli /tmp/
-RUN /tmp/config.sh
-CMD ["/opt/wildfly/bin/adduser.sh","-a","admin admin"]
+RUN /tmp/config.sh  
+ADD runcommands.sh /opt/
 
 EXPOSE 8080 8787 9990
 
-CMD ["java","-jar","/opt/fakeSMTP-2.0.jar","-b","-s","-o","mails"]
-CMD ["/opt/wildfly/bin/standalone.sh","-c","standalone-modeshape.xml","-b", "0.0.0.0","--debug"]
+CMD sh /opt/runcommands.sh 
 

@@ -20,6 +20,7 @@ wait_for_wildfly
 echo "==> Executing..."
 echo "Runnind datasource.cli"
 $JBOSS_CLI -c --file=`dirname "$0"`/datasource.cli
+$JBOSS_HOME/bin/add-user.sh -a admin admin 
 
 echo "==> Shutting down WildFly..."
 if [ "$JBOSS_MODE" = "standalone" ]; then

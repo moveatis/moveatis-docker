@@ -1,2 +1,0 @@
-This Dockerfile was made under influence of the following Youtube playlist:
-https://youtu.be/i1fVIt4KTm0
