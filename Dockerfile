@@ -12,15 +12,13 @@ RUN yum update -y && yum install wget unzip -y \
 && sed '/<webapp name=\"modeshape-explorer.war\"\/>/a -->' standalone/configuration/standalone-modeshape-new.xml > standalone/configuration/standalone-modeshape.xml \ 
 && rm --force standalone/configuration/standalone-modeshape-new.xml \ 
 && echo "admin=readwrite,read,admin" >> standalone/configuration/application-roles.properties \ 
-&& wget -O /tmp/postgresql-9.4.1208.jre7.jar https://jdbc.postgresql.org/download/postgresql-9.4.1208.jre7.jar \ 
-&& cd /opt && mkdir mails && wget http://nilhcem.github.com/FakeSMTP/downloads/fakeSMTP-latest.zip \ 
-&& unzip fakeSMTP-latest.zip && rm -f fakeSMTP-latest.zip
+&& wget -O /tmp/postgresql-9.4.1208.jre7.jar https://jdbc.postgresql.org/download/postgresql-9.4.1208.jre7.jar 
 ADD batchfiles/config.sh /tmp/
 ADD datasource.cli /tmp/
 RUN /tmp/config.sh  
 ADD runcommands.sh /opt/
 
-EXPOSE 8080 8787 9990
+EXPOSE 80
 
 CMD sh /opt/runcommands.sh 
 
