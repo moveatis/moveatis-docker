@@ -9,7 +9,7 @@ RUN yum update -y && yum install wget unzip -y \
 && wget http://downloads.jboss.org/modeshape/4.6.0.Final/modeshape-4.6.0.Final-jboss-wf9-dist.zip \ 
 && unzip modeshape-4.6.0.Final-jboss-wf9-dist.zip && rm --force modeshape-4.6.0.Final-jboss-wf9-dist.zip \ 
 && sed '/<webapp name=\"modeshape-rest.war\"\/>/i <!--' standalone/configuration/standalone-modeshape.xml > standalone/configuration/standalone-modeshape-new.xml \ 
-&& sed '/<webapp name=\"modeshape-explorer.war\"\/>/a -->' standalone/configuration/standalone-modeshape-new.xml > standalone/configuration/standalone-modeshape.xml \ 
+&& sed '/<webapp name=\"modeshape-explorer.war\"\/>/a -->' standalone/configuration/standalone-modeshape-new.xml > standalone/configuration/standalone-modeshape.xml && sed -i.bkp '/<http-listener name=\"default\" socket-binding=\"http\" redirect-socket=\"https\"\/>/a <ajp-listener name=\"ajp\" socket-binding=\"ajp\"\/>' standalone/configuration/standalone-modeshape.xml \  
 && rm --force standalone/configuration/standalone-modeshape-new.xml \ 
 && echo "admin=readwrite,read,admin" >> standalone/configuration/application-roles.properties \ 
 && wget -O /tmp/postgresql-9.4.1208.jre7.jar https://jdbc.postgresql.org/download/postgresql-9.4.1208.jre7.jar 
@@ -18,7 +18,7 @@ ADD datasource.cli /tmp/
 RUN /tmp/config.sh  
 ADD runcommands.sh /opt/
 
-EXPOSE 80
+EXPOSE 8009
 
 CMD sh /opt/runcommands.sh 
 
