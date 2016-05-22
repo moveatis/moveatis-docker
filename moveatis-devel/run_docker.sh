@@ -18,9 +18,9 @@ echo "Database docker running"
 
 echo "Starting Wildfly docker"
 docker start -a -i moveatis-wildfly 2>/dev/null 
-# Same as before; read if there is an error and create docker image, if there was 
+# Same as before; read if there is an error and create docker image, if there wasn't already one existing 
 if [ $? -ne 0 ]; then
-    docker create --privileged=true -it -p 8009:8009 --name moveatis-wildfly --link moveatis-db:lotasdb -v $releasePath:/opt/wildfly/standalone/deployments moveatis/moveatis-release 2>/dev/null
+    docker create --privileged=true -it -p 25:25 -p 8009:8009 --name moveatis-wildfly --link moveatis-db:lotasdb -v $dockerPath:/opt/wildfly/standalone/deployments moveatis/moveatis-release 2>/dev/null
     if [ $? -eq 0 ]; then
     	docker start -a -i moveatis-wildfly 2>/dev/null
     fi

@@ -1,2 +1,0 @@
-1) Install git
-2) Generate ssh-key

@@ -3,7 +3,7 @@
 JBOSS_HOME=/opt/wildfly
 JBOSS_CLI=$JBOSS_HOME/bin/jboss-cli.sh
 JBOSS_MODE="standalone"
-JBOSS_CONFIG=$JBOSS_MODE-modeshape.xml
+JBOSS_CONFIG=$JBOSS_MODE.xml
 
 function wait_for_wildfly() {
   until `$JBOSS_CLI -c "ls /deployment" &> /dev/null`; do
@@ -12,6 +12,9 @@ function wait_for_wildfly() {
 }
 
 echo "==> Starting WildFly..."
+echo "Moving standalone.xml"
+rm /opt/wildfly/standalone/configuration/standalone.xml
+mv /tmp/standalone.xml /opt/wildfly/standalone/configuration/
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -c $JBOSS_CONFIG &
 
 echo "==> Waiting..."

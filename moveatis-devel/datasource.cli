@@ -1,0 +1,7 @@
+batch
+module add --name=org.postgresql --resources=/tmp/postgresql-9.4.1208.jar --dependencies=javax.api,javax.transaction.api
+/subsystem=datasources/jdbc-driver=postgres:add(driver-name=postgres,driver-module-name=org.postgresql,driver-class-name=org.postgresql.Driver)
+/subsystem=datasources/data-source=ExampleDS:remove()
+/subsystem=ee/service=default-bindings:undefine-attribute(name=datasource)
+run-batch
+
